@@ -56,5 +56,6 @@
     "fs": false,
     "os": false,
     "path": false
-  }
+  },
+  "homepage": "https://distributedarchitectureprocessmining.github.io/frontend",
 }
