@@ -15,12 +15,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // This is the root component of our app. The router is used to create different pages. 
   // Currently all of PDL is located at "Home" and effectively works as a single page app.
-  <Router>
+  <HashRouter>
         <Routes>
             <Route path="Page1" element={<App page = {"Page1"} />} />
             <Route path="/" element={<App page = {"Home"}/>}/>
         </Routes>
-    </Router>
+    </HashRouter>
 );
 
 reportWebVitals();
