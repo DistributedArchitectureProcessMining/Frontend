@@ -5,27 +5,41 @@ on:
     branches:
       - main  # Or the branch you want to deploy
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout Repository 🛎️
+        uses: actions/checkout@v3
 
-      - name: Set Up Node.js
+      - name: Set Up Node.js 🔧
         uses: actions/setup-node@v3
         with:
           node-version: 14
 
-      - name: Install Dependencies
+      - name: Install Dependencies 🔧
         run: npm install
 
-      - name: Build
+      - name: Build 🔧
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy 🚀
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+            path: ./dist
+
+  deploy:
+      name: Deploy to GitHub Pages
+      permissions:
+          pages: write
+          id-token: write
+      environment:
+          name: github-pages
+          url: ${{ steps.deployment.outputs.page_url }}
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+          - name: Deploy to GitHub Pages
+            id: deployment
+            uses: actions/deploy-pages@v1
 
